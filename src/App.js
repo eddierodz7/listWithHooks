@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import TodoListLandingPage from "./Components/TodoList";
+import FoodList from "./Components/FoodList";
+import HomePage from "./Components/Home";
+import MovieList from "./Components/MovieList";
+
+
+export default function App() {
+
+  return(
+    <Router>
+      <nav className="navbar navbar-expand-lg navbar-light bg-ligh" >
+        <ul>
+        <li><Link to={'/'} className="nav-link"> Home </Link></li>
+        <li><Link to={'/TodoList'} className="nav-link"> Todo List </Link></li>
+        <li><Link to={'/FoodList'} className="nav-link"> Food List </Link></li>
+        <li><Link to={'/MovieList'} className="nav-link"> Movie List </Link></li>
+        </ul>
+      </nav>
+      <hr />
+      <Switch>
+        <Route path='/' component={HomePage} exact />
+        <Route path='/TodoList' component={TodoListLandingPage}  />
+        <Route path='/FoodList' component={FoodList} />
+        <Route path='/MovieList' component={MovieList} />
+      </Switch>
+
+  </Router>
+  )
 }
 
-export default App;
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
